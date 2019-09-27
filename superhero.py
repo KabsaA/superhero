@@ -9,7 +9,6 @@ class Ability:
       #self.attack_strength = attack_strength
     def attack(self):
       #''' Return a value between 0 and the value set by self.max_damage.'''
-      damageDone = (self.max_damage - self.attack_strength)
       # TODO: Use random.randint(a, b) to select a random attack value.
       attackValue = random.randint(0,self.attack_strength)
       # Return an attack value between 0 and the full attack.
@@ -27,7 +26,7 @@ class Armor:
         # TODO: Create instance variables for the values passed in.
     def block(self):
             #Return a random value between 0 and the initialized max_block strength.
-        pass
+            return (random.randint(0,self.max_block))
       # TODO: This method should run Ability.attack() on every ability
       # in self.abilities and returns the total as an integer.
 class Hero:
@@ -35,8 +34,9 @@ class Hero:
           self.abilities = []
           armors: []
           self.name = name
-          starting_health: starting_health
+          self.starting_health: starting_health
           self.current_health = (starting_health - 0)
+
 
        # TODO: Initialize instance variables values as instance variables
        # (Some of these values are passed in above,
@@ -51,9 +51,15 @@ class Hero:
 
            # TODO: Add ability object to abilities:List
     def attack(self):
-        for i in self.abilities:
-            Ability.attack()
+        total = 0
+        for ability in self.abilities:
+            total += Ability.attack(ability)
+        return total
+
+
         #Calculate the total damage from all ability attacks. return: total:Int
+
+        #damageDone = (self.max_damage - self.attack_strength)
     def defend(self,incoming_damage):
         pass
     def take_damage(self,damage):
@@ -68,10 +74,11 @@ class Hero:
 
 
 if __name__ == "__main__":
-        # If you run this file from the terminal
-    # this block is executed.
-        # If you run this file from the terminal
-    # this block is executed.
-    ability = Ability("Debugging Ability", 20)
-    print(ability.name)
-    print(ability.attack())
+      # If you run this file from the terminal
+    # this block of code is executed.
+    ability = Ability("Great Debugging", 50)
+    another_ability = Ability("Smarty Pants", 90)
+    hero = Hero("Grace Hopper", 200)
+    hero.add_ability(ability)
+    hero.add_ability(another_ability)
+    print(hero.attack())
