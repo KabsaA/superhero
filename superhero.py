@@ -13,10 +13,45 @@ class Ability:
       attackValue = random.randint(0,self.attack_strength)
       # Return an attack value between 0 and the full attack.
       return attackValue
-      # Hint: The constructor initializes the maximum attack value.
-      #my_dog = Dog("Rex", "SuperDog")
-      #my_dog.bark()
 
+class Weapon(Ability):
+    def attack(self):
+        return random.randint(self.attack_strength * (0.5), self.attack_strength)
+class Team:
+        def remove_hero(self, name):
+            for item in self.heroes:
+                if item.name == name:
+                    self.heroes.remove(item)
+                    return self.heroes
+
+        def view_all_heroes(self):
+            for item in self.heroes:
+                print(item.name)
+
+        def add_hero(self, new_hero):
+            self.heroes.append(new_hero)
+
+    # Keep all your current code, but add these methods
+        def attack(self, other_team):
+        #''' Battle each team against each other.'''
+        # TODO: Randomly select a living hero from each team and have
+        # them fight until one or both teams have no surviving heroes.
+        # Hint: Use the fight method in the Hero class.
+            pass
+
+        def revive_heroes(self, health=100):
+        #''' Reset all heroes health to starting_health'''
+        # TODO: This method should reset all heroes health to their
+        # original starting value.
+            pass
+
+        def stats(self):
+        #'''Print team statistics'''
+        # TODO: This method should print the ratio of kills/deaths for each
+        # member of the team to the screen.
+        # This data must be output to the console.
+        # Hint: Use the information stored in each hero.
+            pass
 
 class Armor:
     def __init__(self, name, max_block):
@@ -34,7 +69,6 @@ class Hero:
           self.abilities = []
           self.armors = []
           self.name = name
-          self.starting_health = starting_health
           self.current_health = starting_health
 
 
@@ -76,15 +110,35 @@ class Hero:
         else:
             return False
     def fight(self,opponent):
-        pass
-
-
-
+        fighting = True
+        while fighting:
+            if self.is_alive() == True:
+                gotHit = self.attack()
+                opponent.take_damage(gotHit)
+                print(str(self.name) + " won!")
+            else:
+                break
+            if opponent.is_alive() == True:
+                oppAttack = opponent.attack()
+                self.take_damage(oppAttack)
+                print(str(self.name) + " won!")
+            else:
+                break
 
 
 if __name__ == "__main__":
-    hero = Hero("Grace Hopper", 200)
-    hero.take_damage(150)
-    print(hero.is_alive())
-    hero.take_damage(15000)
-    print(hero.is_alive())
+    # If you run this file from the terminal
+    # this block is executed.
+
+    hero1 = Hero("Wonder Woman")
+    hero2 = Hero("Dumbledore")
+    ability1 = Ability("Super Speed", 600)
+    print(Weapon.attack(ability1))
+    ability2 = Ability("Super Eyes", 2000)
+    ability3 = Ability("Wizard Wand", 20)
+    ability4 = Ability("Wizard Beard", 20)
+    hero1.add_ability(ability1)
+    hero1.add_ability(ability2)
+    hero2.add_ability(ability3)
+    hero2.add_ability(ability4)
+    hero1.fight(hero2)
