@@ -32,10 +32,10 @@ class Armor:
 class Hero:
     def __init__(self, name, starting_health=100):
           self.abilities = []
-          armors: []
+          self.armors = []
           self.name = name
-          self.starting_health: starting_health
-          self.current_health = (starting_health - 0)
+          self.starting_health = starting_health
+          self.current_health = starting_health
 
 
        # TODO: Initialize instance variables values as instance variables
@@ -55,15 +55,19 @@ class Hero:
         for ability in self.abilities:
             total += Ability.attack(ability)
         return total
+    def add_armor(self, armor):
+        self.armors.append(armor)
 
-
-        #Calculate the total damage from all ability attacks. return: total:Int
-
-        #damageDone = (self.max_damage - self.attack_strength)
     def defend(self,incoming_damage):
-        pass
+        total = 0
+        for armor in self.armors:
+            total += Armor.block(armor)
+        return total
+
+
     def take_damage(self,damage):
-        pass
+        damageDone = self.defend(damage)
+        self.current_health -= damageDone
     def is_alive(self):
         pass
     def fight(self,opponent):
@@ -74,11 +78,8 @@ class Hero:
 
 
 if __name__ == "__main__":
-      # If you run this file from the terminal
-    # this block of code is executed.
-    ability = Ability("Great Debugging", 50)
-    another_ability = Ability("Smarty Pants", 90)
     hero = Hero("Grace Hopper", 200)
-    hero.add_ability(ability)
-    hero.add_ability(another_ability)
-    print(hero.attack())
+    shield = Armor("Shield", 50)
+    hero.add_armor(shield)
+    hero.take_damage(50)
+    print(hero.current_health)
