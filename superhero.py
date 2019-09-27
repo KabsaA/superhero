@@ -70,6 +70,19 @@ class Hero:
           self.armors = []
           self.name = name
           self.current_health = starting_health
+          self.deaths = 0
+          self.kills = 0
+
+    def add_kill(self, num_kills):
+        # This method should add the number of kills to self.kills
+        self.kills += num_kills
+        return self.kills
+
+    def add_deaths(self, num_deaths):
+        ''' Update deaths with num_deaths'''
+        # This method should add the number of deaths to self.deaths
+        self.deaths += num_deaths
+        return self.deaths
 
 
        # TODO: Initialize instance variables values as instance variables
