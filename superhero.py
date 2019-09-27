@@ -61,15 +61,20 @@ class Hero:
     def defend(self,incoming_damage):
         total = 0
         for armor in self.armors:
-            total += Armor.block(armor)
-        return total
+            total+= int(armor.block())
+        return total + incoming_damage
 
 
     def take_damage(self,damage):
-        damageDone = self.defend(damage)
-        self.current_health -= damageDone
+        newCurrent = self.current_health
+        defense = self.defend(damage)
+        self.current_health = newCurrent - defense
+
     def is_alive(self):
-        pass
+        if self.current_health > 0:
+            return True
+        else:
+            return False
     def fight(self,opponent):
         pass
 
@@ -79,7 +84,7 @@ class Hero:
 
 if __name__ == "__main__":
     hero = Hero("Grace Hopper", 200)
-    shield = Armor("Shield", 50)
-    hero.add_armor(shield)
-    hero.take_damage(50)
-    print(hero.current_health)
+    hero.take_damage(150)
+    print(hero.is_alive())
+    hero.take_damage(15000)
+    print(hero.is_alive())
