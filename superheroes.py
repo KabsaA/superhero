@@ -76,24 +76,26 @@ class Hero:
         return self.kills
 
     def add_deaths(self, num_deaths):
-        ''' Update deaths with num_deaths'''
+        #''' Update deaths with num_deaths'''
         # This method should add the number of deaths to self.deaths
         self.deaths += num_deaths
         return self.deaths
-      def add_weapon(self, weapon):
+
+    def add_weapon(self, weapon):
         '''Add weapon to self.abilities'''
         # TODO: This method will append the weapon object passed in as an
         # argument to self.abilities.
         # This means that self.abilities will be a list of
         # abilities and weapons.
         pass
+
     def add_armor(self, armor):
-    '''Add Armor to self.armors
-        armor: Armor Object
-    '''
+    #'''Add Armor to self.armors
+    #    armor: Armor Object
+    #'''
     # TODO: This method will add the armor object that is passed in to
     # the list of armor objects defined in the constructor: `self.armors`.
-    pass
+        pass
 
        # TODO: Initialize instance variables values as instance variables
        # (Some of these values are passed in above,
@@ -157,29 +159,24 @@ class Hero:
             print(str(opponent.name) + " wins!")
 class Arena:
     def __init__(self):
-        '''Instantiate properties
-            team_one: None
-            team_two: None
-        '''
-        # TODO: create instance variables named team_one and team_two that
-        # will hold our teams.
-     def create_ability(self):
-        '''Prompt for Ability information.
-            return Ability with values from user Input
-        '''
-        # TODO: This method will allow a user to create an ability.
-        # Prompt the user for the necessary information to create a new ability object.
-        # return the new ability object.
-        pass
-     def create_weapon(self):
+        self.team_one = None
+        self.team_two = None
+        self.winning_team = None
+
+    def create_ability(self):
+        addedAbility = input("Add ability for hero: ")
+        Ability(addedAbility)
+
+    def create_weapon(self):
         '''Prompt user for Weapon information
             return Weapon with values from user input.
         '''
+
         # TODO: This method will allow a user to create a weapon.
         # Prompt the user for the necessary information to create a new weapon object.
         # return the new weapon object.
         pass
-     def create_armor(self):
+    def create_armor(self):
         '''Prompt user for Armor information
           return Armor with values from user input.
         '''
@@ -190,9 +187,9 @@ class Arena:
         #  return the new armor object with values set by user.
         pass
         def create_hero(self):
-        '''Prompt user for Hero information
-          return Hero with values from user input.
-        '''
+        #'''Prompt user for Hero information
+         # return Hero with values from user input.
+        #'''
         # TODO: This method should allow a user to create a hero.
         # User should be able to specify if they want armors, weapons, and
         # abilities.
@@ -200,8 +197,8 @@ class Arena:
         # your hero.
         #
         # return the new hero object
-        pass
-      def build_team_one(self):
+            pass
+    def build_team_one(self):
         '''Prompt the user to build team_one '''
         # TODO: This method should allow a user to create team one.
         # Prompt the user for the number of Heroes on team one
@@ -236,13 +233,29 @@ class Arena:
 
 
 if __name__ == "__main__":
-    # If you run this file from the terminal
-    # this block is executed.
+    game_is_running = True
+
+    # Instantiate Game Arena
     arena = Arena()
+
+    #Build Teams
     arena.build_team_one()
     arena.build_team_two()
-    arena.team_battle()
-    arena.show_stats()
+
+    while game_is_running:
+
+        arena.team_battle()
+        arena.show_stats()
+        play_again = input("Play Again? Y or N: ")
+
+        #Check for Player Input
+        if play_again.lower() == "n":
+            game_is_running = False
+
+        else:
+            #Revive heroes to play again
+            arena.team_one.revive_heroes()
+            arena.team_two.revive_heroes()
 
     # hero1 = Hero("Wonder Woman")
     # hero2 = Hero("Dumbledore")
