@@ -181,28 +181,33 @@ class Arena(Team,Ability):
             hero.add_weapon(addWeapon)
         return hero
 
-    def build_team_one(self):
+	def build_team_two(self):
+		team_name = input("Enter a Team 2 name: ")
+		num_of_heroes = int(input("Enter a number of heroes: "))
 
-        team1 = Team(input("Team 1 Name: "))
-        team1Amount = input("How many heroes: ")
-        for i in range(int(team1Amount)):
-            hero = self.create_hero(team1)
-            team1.add_hero(hero)
-        self.team_one = team1
+		self.team_two = Team(team_name)
 
-    def build_team_two(self):
-        team2 = Team(input("Team 2 Name: "))
-        team2Amount = input("How many heroes: ")
-        for i in range(int(team2Amount)):
-            hero = self.create_hero(team2)
-            team2.add_hero(hero)
-        self.team_two = team2
-    def team_battle(self):
-        self.team_one.attack(self.team_two)
-    def show_stats(self):
-        print("Team 1:" + str(self.team_one.stats()))
-        print("Team 2:" + str(self.team_two.stats()))
+		for i in range(num_of_heroes):
+			self.team_two.add_hero(self.create_hero())
 
+
+	def team_battle(self):
+		self.team_one.attack(self.team_two)
+
+
+
+	def show_stats(self):
+
+		if self.team_one.is_all_dead():
+			print(self.team_one.name + " is the winner!")
+			print("The teams ratio was " + str(self.team_one.get_ratio()))
+			for hero in self.team_one.get_alive_heroes():
+				print(hero.name)
+		else:
+			self.team_two.name + " is the winner!"
+			print("The teams ratio was " + str(self.team_two.get_ratio()))
+			for hero in self.team_two.get_alive_heroes():
+				print(hero.name)
 
 if __name__ == "__main__":
     # arena = Arena()
