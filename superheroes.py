@@ -95,15 +95,15 @@ class Team:
 		self.name = name
 		self.heroes = []
 
-	def add_hero(self, hero):
+	def add_hero(self, hero): #adds hero to list
 		self.heroes.append(hero)
 
-	def remove_hero(self, fired_hero):
+	def remove_hero(self, fired_hero): #removes hero from list
 		for hero in self.heroes:
 			self.heroes.remove(hero)
 		return 0
 
-	def get_alive_heroes(self):
+	def get_alive_heroes(self): #gets alive heroes from list
 		alive_heroes = []
 		for hero in self.heroes:
 			if hero.is_alive():
@@ -111,14 +111,14 @@ class Team:
 
 		return alive_heroes
 
-	def view_all_heroes(self):
+	def view_all_heroes(self): #shows all hereos in lsit
 		for hero in self.heroes:
 			print(hero.name)
 
 	def is_all_dead(self):
 		all_dead = False
 
-		for hero in self.heroes:
+		for hero in self.heroes: #loops through list to see what hereos are alive
 			if hero.is_alive():
 				all_dead = True
 
@@ -158,7 +158,7 @@ class Team:
 	    for hero in self.heroes:
 	    	print(hero.name + "has a ratio of " + hero.kills + "/" + hero.deaths)
 
-	def get_ratio(self):
+	def get_ratio(self): #get kills to deaths ratio
 		kills = 0
 		deaths = 0
 		for hero in self.heroes:
@@ -221,7 +221,7 @@ class Arena:
 
 
 	def show_stats(self):
-
+#showing stats for winning team
 		if self.team_one.is_all_dead():
 			print(self.team_one.name + " is the winner!")
 			print("The teams ratio was " + str(self.team_one.get_ratio()))
