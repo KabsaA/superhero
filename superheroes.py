@@ -10,7 +10,7 @@ class Ability:
     def attack(self):
       #''' Return a value between 0 and the value set by self.max_damage.'''
       # TODO: Use random.randint(a, b) to select a random attack value.
-        return random.randint(0,self.attack_strength)
+        return random.randint(0,self.max_damage)
       # Return an attack value between 0 and the full attack.
 
 
@@ -198,7 +198,7 @@ class Arena(Team,Ability):
             team2.add_hero(hero)
         self.team_two = team2
     def team_battle(self):
-        self.winning_team = self.team_one.attack(self.team_two)
+        self.team_one.attack(self.team_two)
     def show_stats(self):
         print("Team 1:" + str(self.team_one.stats()))
         print("Team 2:" + str(self.team_two.stats()))
