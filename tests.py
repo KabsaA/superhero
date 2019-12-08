@@ -7,7 +7,6 @@ import random
 
 # Helper Function
 
-
 def capture_console_output(function_body):
     # _io.StringIO object
     string_io = io.StringIO()
